@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MtgIOComponent } from './mtg-io/mtg-io.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MtgIOComponent
   ],
   imports: [
     BrowserModule,
