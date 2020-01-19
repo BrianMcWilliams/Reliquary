@@ -1,0 +1,19 @@
+{
+  "name": "reliquary",
+  "version": "1.0.0",
+  "description": "Reliquary",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrianMcWilliams/Reliquary.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrianMcWilliams/Reliquary/issues"
+  },
+  "homepage": "https://github.com/BrianMcWilliams/Reliquary#readme"
+}
