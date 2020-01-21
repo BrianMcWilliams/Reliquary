@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-mtg-io',
   templateUrl: './mtg-io.component.html',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MtgIOComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  ScryfallURL = 'https://api.scryfall.com/';
+
+  CardData :string = null;
+  CardImage : ImageData = null;
 
   ngOnInit() {
+    this.http.get(this.ScryfallURL + '/cards/random').
+      subscribe( (data: any) => {
+        this.CardData = data.name;
+        this.CardImage = data.image_uris.large;
+      });
   }
-
 }
+
+
