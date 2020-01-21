@@ -1,0 +1,6 @@
+<p>yugioh works!</p>
+
+<ng-template ngFor let-item [ngForOf]="YuGiOhCards" let-i="index">
+    <li>{{item.CardName}}</li>
+    <li><img src={{item.CardImage}} /></li>
+  </ng-template>

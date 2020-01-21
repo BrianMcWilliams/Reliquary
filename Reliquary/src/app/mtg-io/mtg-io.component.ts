@@ -9,6 +9,7 @@ export class MtgIOComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
+  // https://scryfall.com/docs/api/cards/random
   ScryfallURL = 'https://api.scryfall.com/';
 
   CardData :string = null;

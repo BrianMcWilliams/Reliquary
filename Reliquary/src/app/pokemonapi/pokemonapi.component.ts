@@ -17,7 +17,7 @@ export class PokemonapiComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
-
+  // https://pokemontcg.io/
   PokemonURL = 'https://api.pokemontcg.io/v1/';
 
   PokemonCards : Array<PokemonCard> = new Array<PokemonCard>();
