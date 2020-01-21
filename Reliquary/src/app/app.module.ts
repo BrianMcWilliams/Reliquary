@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MtgIOComponent } from './mtg-io/mtg-io.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PokemonapiComponent } from './pokemonapi/pokemonapi.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MtgIOComponent
+    MtgIOComponent,
+    PokemonapiComponent
   ],
   imports: [
     BrowserModule,

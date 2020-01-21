@@ -1,0 +1,6 @@
+<p>pokemonapi works!</p>
+
+<ng-template ngFor let-item [ngForOf]="PokemonCards" let-i="index">
+    <li>{{item.CardName}}</li>
+    <li><img src={{item.CardImage}} /></li>
+  </ng-template>
