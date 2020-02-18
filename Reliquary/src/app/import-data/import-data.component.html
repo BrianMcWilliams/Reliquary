@@ -1,3 +1,10 @@
-<p>import-data works!</p>
-<input type="file"(change)="onFileSelected($event)">
-<button type="button" (click)="onUpload()">Upload</button>
+<div class="container">
+    <h1> Relique </h1>
+    <input type="file"(change)="onFileSelected($event)" ria-label="File browser example">
+    <button type="button" (click)="onUpload()">Upload</button>
+
+    <div class="upload-btn-wrapper">
+        <button class="btn">Upload a file</button>
+        <input type="file" (change)="onFileSelected($event)" />
+      </div>
+</div>
