@@ -7,13 +7,15 @@ import { MtgIOComponent } from './mtg-io/mtg-io.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonapiComponent } from './pokemonapi/pokemonapi.component';
 import { YugiohComponent } from './yugioh/yugioh.component';
+import { ImportDataComponent } from './import-data/import-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MtgIOComponent,
     PokemonapiComponent,
-    YugiohComponent
+    YugiohComponent,
+    ImportDataComponent
   ],
   imports: [
     BrowserModule,

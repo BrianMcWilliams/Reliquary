@@ -124,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Reliquary"
+    }
+  },
+  "defaultProject": "Reliquary",
+  "cli": {
+    "analytics": "88627b17-e486-48f4-94b0-361200979752"
+  }
 }
