@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -9,10 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class ImportDataComponent implements OnInit {
 
 
+
   selectedFile: File = null;
   // database = admin.database;
 
-  constructor() {}
+  constructor(private db: AngularFirestore) {
+    const things = db.collection('things').valueChanges();
+    things.subscribe(console.log);
+}
   onFileSelected(event) {
     console.log(event);
     this.selectedFile = event.target.files[0];

@@ -20,15 +20,16 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 
 // 2. Add your credentials from step 1
 const config = {
-  apiKey: "0158da85b3c91e6ac92f72d3d4e70b9fab945b6e",
+  apiKey: "AIzaSyD1-03ws5P_W0PoPYHuKonjBC25srYsr9A",
   authDomain: "reliquary-22fc5.firebaseapp.com",
   databaseURL: "https://reliquary-22fc5.firebaseio.com",
   projectId: "reliquary-22fc5",
   storageBucket: "reliquary-22fc5.appspot.com",
-  messagingSenderId: "sender-id",
-  appId: "app-id",
-  measurementId: "G-measurement-id",
+  messagingSenderId: "669341095451",
+  appId: "1:669341095451:web:0a81f1f8eb17ca6d64cabe",
+  measurementId: "G-YFBGJST868"
 };
+
 
 
 @NgModule({
@@ -54,4 +55,8 @@ const config = {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+
+
+ }
