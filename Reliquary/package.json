@@ -19,9 +19,13 @@
     "@angular/platform-browser": "~8.2.11",
     "@angular/platform-browser-dynamic": "~8.2.11",
     "@angular/router": "~8.2.11",
+    "firebase": "^7.8.2",
+    "firebase-admin": "^8.9.2",
+    "grpc": "^1.24.2",
     "mtgsdk": "^0.4.3",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "webpack": "^4.41.6",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

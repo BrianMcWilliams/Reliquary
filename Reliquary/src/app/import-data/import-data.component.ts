@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpEventType } from '@angular/common/http';
+import * as admin from 'firebase-admin';
 
 @Component({
   selector: 'app-import-data',
@@ -9,26 +9,23 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 export class ImportDataComponent implements OnInit {
 
   selectedFile: File = null;
+  database = admin.database;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
   onFileSelected(event) {
     console.log(event);
     this.selectedFile = event.target.files[0];
   }
   onUpload() {
-    // const fd = new FormData();
-    // fd.append('csv', this.selectedFile, this.selectedFile.name);
-    // this.http.post('', fd, {
-    //   reportProgress: true,
-    //   observe: 'events',
-    // })
-    // .subscribe(event => {
-    //   if (event.type === HttpEventType.UploadProgress) {
-    //     console.log('Upload progress: ' + Math.round(event.loaded / event.total * 100) + '%');
-    //   } else if (event.type === HttpEventType.Response) {
-    //     console.log(event);
-    //   }
-    // });
+    if(this.selectedFile == null)
+      return;
+    
+    const fd = new FormData();
+    fd.append('csv', this.selectedFile, this.selectedFile.name);
+
+    debugger ;
+
+    //this.database.collection('Cards').doc('CardTable').set(fd);
   }
   ngOnInit() {
   }
