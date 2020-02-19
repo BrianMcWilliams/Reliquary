@@ -40,8 +40,6 @@ export class ImportDataComponent implements OnInit {
     .then( (json: any[]) => {
       const cards = this.firebaseDB.collection('Cards').doc('CardTable');
       cards.set({json}); //Needs to be an object, just wrapping the array.
-
-      debugger;
     });
   }
 
