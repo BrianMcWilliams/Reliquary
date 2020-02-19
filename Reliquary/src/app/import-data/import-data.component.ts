@@ -19,7 +19,7 @@ export class ImportDataComponent implements OnInit {
   onFileSelected(event) {
     this.selectedFile = event.target.files[0];
   }
-  
+
   onUpload() {
     if (this.selectedFile == null) {
       return;
@@ -32,14 +32,15 @@ export class ImportDataComponent implements OnInit {
   }
 
   onFileRead(event: ProgressEvent) {
-    if(!event.isTrusted || !event.lengthComputable)
+    if (!event.isTrusted || !event.lengthComputable) {
       return;
-    
+    }
+
     csvtojson()
     .fromString(this.reader.result.toString())
     .then( (json: any[]) => {
       const cards = this.firebaseDB.collection('Cards').doc('CardTable');
-      cards.set({json}); //Needs to be an object, just wrapping the array.
+      cards.set({json}); // Needs to be an object, just wrapping the array.
     });
   }
 

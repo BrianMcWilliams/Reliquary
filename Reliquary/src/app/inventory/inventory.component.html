@@ -1,2 +1,8 @@
 <p>inventory works!</p>
+ <p> {{inventory.json[0].Category}}</p>{{inventory}}
 
+ <table mat-table [dataSource]="inventory.json">
+    <ng-container matColumnDef="Container">
+        <th mat-header-cell *matHeaderCellDef> Container </th>
+        <td mat-cell *matCellDef="let element"> {{element.Container}} </td>
+      </ng-container>  </table>
