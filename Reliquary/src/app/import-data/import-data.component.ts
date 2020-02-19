@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-
+import * as csvtojson from 'csvtojson';
 
 @Component({
   selector: 'app-import-data',
@@ -8,30 +8,43 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./import-data.component.sass']
 })
 export class ImportDataComponent implements OnInit {
-
-
-
-  selectedFile: File = null;
-  // database = admin.database;
+  selectedFile: Blob = null;
+  firebaseDB: AngularFirestore = null;
+  reader: FileReader = null;
 
   constructor(private db: AngularFirestore) {
-    const things = db.collection('things').valueChanges();
-    things.subscribe(console.log);
-}
+    this.firebaseDB = db;
+  }
+
   onFileSelected(event) {
-    console.log(event);
     this.selectedFile = event.target.files[0];
   }
+  
   onUpload() {
     if (this.selectedFile == null) {
       return;
     }
-    // const fd = new FormData();
-    // fd.append('csv', this.selectedFile, this.selectedFile.name);
 
+    this.reader = new FileReader();
+    this.reader.readAsBinaryString(this.selectedFile);
 
-    // this.database.collection('Cards').doc('CardTable').set(fd);
+    this.reader.onload = (event: ProgressEvent) => this.onFileRead(event);
   }
+
+  onFileRead(event: ProgressEvent) {
+    if(!event.isTrusted || !event.lengthComputable)
+      return;
+    
+    csvtojson()
+    .fromString(this.reader.result.toString())
+    .then( (json: any[]) => {
+      const cards = this.firebaseDB.collection('Cards').doc('CardTable');
+      cards.set({json}); //Needs to be an object, just wrapping the array.
+
+      debugger;
+    });
+  }
+
   ngOnInit() {
   }
 
