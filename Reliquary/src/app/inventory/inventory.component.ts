@@ -18,7 +18,8 @@ export class InventoryComponent implements OnInit {
     this.docRef.get()
       .subscribe(snapshot => {
         snapshot.forEach(doc => {
-          this.inventory = doc.data();
+          this.inventory = doc.data().json;
+          debugger;
         });
       });
   }
