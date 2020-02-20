@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-inventory',
@@ -6,10 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory.component.sass']
 })
 export class InventoryComponent implements OnInit {
+  docRef = null;
+  inventory = null;
 
-  constructor() { }
+  constructor(private db: AngularFirestore) {
+    this.docRef = db.collection('Cards');
+  }
+
+  getInventory() {
+    this.docRef.get()
+      .subscribe(snapshot => {
+        snapshot.forEach(doc => {
+          this.inventory = doc.data().json;
+          debugger;
+        });
+      });
+  }
 
   ngOnInit() {
+    this.getInventory();
   }
 
 }
