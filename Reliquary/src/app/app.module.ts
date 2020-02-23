@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-
+import { IgxNavigationDrawerModule } from 'igniteui-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MtgIOComponent } from './mtg-io/mtg-io.component';
@@ -11,7 +11,6 @@ import { YugiohComponent } from './yugioh/yugioh.component';
 import { ImportDataComponent } from './import-data/import-data.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { HomeComponent } from './home/home.component';
-
 
 // 1. Import the libs you need
 import { AngularFireModule } from '@angular/fire';
@@ -32,8 +31,7 @@ const config = {
   measurementId: 'G-YFBGJST868'
 };
 
-
-
+//I keep the new line
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,23 +40,22 @@ const config = {
     YugiohComponent,
     ImportDataComponent,
     InventoryComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     MatTableModule,
-
+    IgxNavigationDrawerModule,
+    
     AngularFireModule.initializeApp(config),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
+    AngularFirestoreModule,
+    AngularFireAuthModule,
     AngularFireStorageModule, BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-
- }
+}
