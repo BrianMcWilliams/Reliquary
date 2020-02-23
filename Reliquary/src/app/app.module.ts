@@ -18,6 +18,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 
 // 2. Add your credentials from step 1
 const config = {
@@ -41,6 +42,7 @@ const config = {
     ImportDataComponent,
     InventoryComponent,
     HomeComponent,
+    NavDrawerComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,14 +50,13 @@ const config = {
     AppRoutingModule,
     MatTableModule,
     IgxNavigationDrawerModule,
-    
     AngularFireModule.initializeApp(config),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule, BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
