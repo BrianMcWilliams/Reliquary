@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { User } from '../services/user.model';
+
 // import { nav-drawer } from '../nav-drawer/nav-drawer.component';
 @Component({
   selector: 'app-home',
