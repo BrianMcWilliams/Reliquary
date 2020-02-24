@@ -24,7 +24,7 @@ export class InventoryComponent implements OnInit {
   {
     this.getInventory();
   }
-  
+
   displayedColumns: string[] = [
     'ASIN', 'Barcode', 'Brand', 'Buy Price', 'Category', 'Description',
     'Domestic Only', 'MSRP', 'Manufacturer SKU', 'Max Qty', 'Product Name',
@@ -35,7 +35,6 @@ export class InventoryComponent implements OnInit {
     this.docRef.get()
       .subscribe(snapshot => {
         snapshot.forEach(doc => {
-          debugger;
           this.inventory = doc.data().json as Card[];
         });
       });

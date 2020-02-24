@@ -1,6 +1,5 @@
 <div class="main" igxLayout>
   <igx-nav-drawer id="navigation" [isOpen]="drawerState.open" [(pin)]="drawerState.pin">
-
     <ng-template igxDrawer>
       <nav>
         <div *ngIf="auth.user$ | async as user; else login">
@@ -18,7 +17,6 @@
         </span>
     </nav>
     </ng-template>
-
     <ng-template igxDrawerMini *ngIf="drawerState.miniTemplate">
         <nav>
           <span *ngFor="let item of navItems" igxDrawerItem [active]="item.text === selected" igxRipple (click)="navigate(item)">
@@ -26,7 +24,6 @@
           </span>
       </nav>
     </ng-template>
-
   </igx-nav-drawer>
 
   <main igxFlex [class.mini-padding]="!drawerState.pin && drawerState.miniTemplate">
