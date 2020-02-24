@@ -57,6 +57,6 @@ export class AuthService {
        photoURL
      };
 
-     return userRef.set(data, )
+     return userRef.set(data, {merge: true});
    }
 }

@@ -1,5 +1,6 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { IgxNavigationDrawerComponent } from 'igniteui-angular';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -8,6 +9,8 @@ import { IgxNavigationDrawerComponent } from 'igniteui-angular';
   styleUrls: ['./nav-drawer.component.sass']
 })
 export class NavDrawerComponent {
+
+  constructor(public auth: AuthService) {}
   public navItems = [
     { name: 'account_circle', text: 'Profile' },
     { name: 'all_out', text: 'Import' },
