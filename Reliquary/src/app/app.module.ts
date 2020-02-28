@@ -58,7 +58,7 @@ const firebaseConfig = {
     AppRoutingModule,
     MatTableModule,
     IgxNavigationDrawerModule,
-    AngularFireModule.initializeApp(config),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule, BrowserAnimationsModule,
