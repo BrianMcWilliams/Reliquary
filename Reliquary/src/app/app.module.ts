@@ -20,12 +20,12 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 import {
-	IgxButtonModule,
-	IgxIconModule,
-	IgxLayoutModule,
-	IgxRadioModule,
-	IgxRippleModule,
-	IgxSwitchModule,
+  IgxButtonModule,
+  IgxIconModule,
+  IgxLayoutModule,
+  IgxRadioModule,
+  IgxRippleModule,
+  IgxSwitchModule,
   IgxToggleModule,
   IgxNavigationDrawerModule
  } from 'igniteui-angular';
@@ -33,14 +33,14 @@ import { StripePayComponent } from './stripe/stripe-pay/stripe-pay.component';
 import { StripeService } from './services/stripe/stripe.service';
 // 2. Add your credentials from step 1
 const firebaseConfig = {
-  apiKey: "AIzaSyD1-03ws5P_W0PoPYHuKonjBC25srYsr9A",
-  authDomain: "reliquary-22fc5.firebaseapp.com",
-  databaseURL: "https://reliquary-22fc5.firebaseio.com",
-  projectId: "reliquary-22fc5",
-  storageBucket: "reliquary-22fc5.appspot.com",
-  messagingSenderId: "669341095451",
-  appId: "1:669341095451:web:0a81f1f8eb17ca6d64cabe",
-  measurementId: "G-YFBGJST868"
+  apiKey: 'AIzaSyD1-03ws5P_W0PoPYHuKonjBC25srYsr9A',
+  authDomain: 'reliquary-22fc5.firebaseapp.com',
+  databaseURL: 'https://reliquary-22fc5.firebaseio.com',
+  projectId: 'reliquary-22fc5',
+  storageBucket: 'reliquary-22fc5.appspot.com',
+  messagingSenderId: '669341095451',
+  appId: '1:669341095451:web:0a81f1f8eb17ca6d64cabe',
+  measurementId: 'G-YFBGJST868'
 };
 
 // I keep the new line
@@ -68,12 +68,12 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireStorageModule, BrowserAnimationsModule,
     IgxButtonModule,
-		IgxIconModule,
-		IgxLayoutModule,
-		IgxNavigationDrawerModule,
-		IgxRadioModule,
-		IgxRippleModule,
-		IgxSwitchModule,
+    IgxIconModule,
+    IgxLayoutModule,
+    IgxNavigationDrawerModule,
+    IgxRadioModule,
+    IgxRippleModule,
+    IgxSwitchModule,
     IgxToggleModule,
     FormsModule,
   ],
