@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../services/user.model';
-
+import { StripePayComponent } from '../stripe/stripe-pay/stripe-pay.component';
 // import { nav-drawer } from '../nav-drawer/nav-drawer.component';
 @Component({
   selector: 'app-home',
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

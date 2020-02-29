@@ -15,6 +15,7 @@ export class NavDrawerComponent {
     { name: 'account_circle', text: 'Profile' },
     { name: 'all_out', text: 'Import' },
     { name: 'web', text: 'Inventory' },
+    { name: 'payment', text: 'Stripe' },
   ];
   public selected = 'Profile';
 

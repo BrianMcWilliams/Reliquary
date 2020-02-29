@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 // 1. Import the libs you need
 import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -28,6 +29,8 @@ import {
   IgxToggleModule,
   IgxNavigationDrawerModule
  } from 'igniteui-angular';
+import { StripePayComponent } from './stripe/stripe-pay/stripe-pay.component';
+import { StripeService } from './services/stripe/stripe.service';
 // 2. Add your credentials from step 1
 const firebaseConfig = {
   apiKey: "AIzaSyD1-03ws5P_W0PoPYHuKonjBC25srYsr9A",
@@ -51,6 +54,7 @@ const firebaseConfig = {
     InventoryComponent,
     HomeComponent,
     NavDrawerComponent,
+    StripePayComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ const firebaseConfig = {
     MatTableModule,
     IgxNavigationDrawerModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule, BrowserAnimationsModule,
@@ -70,10 +75,9 @@ const firebaseConfig = {
 		IgxRippleModule,
 		IgxSwitchModule,
     IgxToggleModule,
-    FormsModule
+    FormsModule,
   ],
-
-    providers: [],
+  providers: [ StripeService ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

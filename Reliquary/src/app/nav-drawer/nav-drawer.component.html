@@ -42,6 +42,10 @@
         <h5 class="setting-title">{{selected}}</h5>
         <app-inventory></app-inventory>
       </div>
+      <div *ngIf="selected == 'Stripe'" >
+        <h5 class="setting-title">{{selected}}</h5>
+        <app-stripe-pay></app-stripe-pay>
+      </div>
     </section>
   </main>
 </div>
