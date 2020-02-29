@@ -27,8 +27,6 @@ export class StripePayComponent implements OnInit {
   }
 
   handlePayment() {
-    debugger;
-
     this.handler.open({
       name: 'FireStarter',
       description: 'Deposit Funds to Account',

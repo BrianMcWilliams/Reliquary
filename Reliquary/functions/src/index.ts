@@ -37,7 +37,7 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
         if (val.source !== null) {
           charge.source = val.source;
         }
-        const response = await stripe.charges.create(charge, {idempotency_key: idempotencyKey});
+        const response = await stripe.charges.create(charge, {idempotencyKey: idempotencyKey});
         // If the result is successful, write it back to the database
         return snap.ref.set(response, { merge: true });
       } catch(error) {
@@ -94,7 +94,7 @@ function reportError(err: any, context = {}) {
   // entry. This name can be any valid log stream name, but must contain "err"
   // in order for the error to be picked up by StackDriver Error Reporting.
   const logName = 'errors';
-  const log = logging.Entry(logName);
+  const log = new logging.Entry(logName);
 
   // https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
   const metadata = {
@@ -116,7 +116,7 @@ function reportError(err: any, context = {}) {
 
   // Write the error log entry
   return new Promise((resolve, reject) => {
-    log.write(log.entry(metadata, errorEvent), (error: any) => {
+    log.write(log(metadata, errorEvent), (error: any) => {
       if (error) {
        reject(error);
        return;
