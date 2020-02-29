@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
-
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+const logging: any = require('@google-cloud/logging')
 admin.initializeApp();
-const logging = require('@google-cloud/logging')();
 const stripe = require('stripe')(functions.config().stripe.token);
 const currency = functions.config().stripe.currency || 'USD';
 
@@ -30,7 +28,7 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
         // Look up the Stripe customer id written in createStripeCustomer
         const snapshot = await admin.firestore().collection(`stripe_customers`).doc(context.params.userId).get()
         const snapval = snapshot.data();
-        const customer = snapval.customer_id
+        const customer = snapval?.customer_id
         // Create a charge using the pushId as the idempotency key
         // protecting against double charges
         const amount = val.amount;
@@ -47,7 +45,8 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
         // still logging an exception with StackDriver
         console.log(error);
         await snap.ref.set({error: userFacingMessage(error)}, { merge: true });
-        return reportError(error, {user: context.params.userId});
+        reportError(error, {user: context.params.userId}).catch((e) => console.log(e));;
+        return;
       }
     });
 // [END chargecustomer]]
@@ -68,12 +67,13 @@ exports.addPaymentSource = functions.firestore.document('/stripe_customers/{user
 
   try {
     const snapshot = await admin.firestore().collection('stripe_customers').doc(context.params.userId).get();
-    const customer =  snapshot.data().customer_id;
+    const customer =  snapshot.data()?.customer_id;
     const response = await stripe.customers.createSource(customer, {source: token});
     return admin.firestore().collection('stripe_customers').doc(context.params.userId).collection("sources").doc(response.fingerprint).set(response, {merge: true});
   } catch (error) {
     await snap.ref.set({'error':userFacingMessage(error)},{merge:true});
-    return reportError(error, {user: context.params.userId});
+    reportError(error, {user: context.params.userId}).catch((e) => console.log(e));
+    return;
   }
 });
 
@@ -81,7 +81,7 @@ exports.addPaymentSource = functions.firestore.document('/stripe_customers/{user
 exports.cleanupUser = functions.auth.user().onDelete(async (user: any) => {
   const snapshot = await admin.firestore().collection('stripe_customers').doc(user.uid).get();
   const customer = snapshot.data();
-  await stripe.customers.del(customer.customer_id);
+  await stripe.customers.del(customer?.customer_id);
   return admin.firestore().collection('stripe_customers').doc(user.uid).delete();
 });
 
@@ -94,7 +94,7 @@ function reportError(err: any, context = {}) {
   // entry. This name can be any valid log stream name, but must contain "err"
   // in order for the error to be picked up by StackDriver Error Reporting.
   const logName = 'errors';
-  const log = logging.log(logName);
+  const log = logging.Entry(logName);
 
   // https://cloud.google.com/logging/docs/api/ref_v2beta1/rest/v2beta1/MonitoredResource
   const metadata = {
@@ -118,9 +118,11 @@ function reportError(err: any, context = {}) {
   return new Promise((resolve, reject) => {
     log.write(log.entry(metadata, errorEvent), (error: any) => {
       if (error) {
-       return reject(error);
+       reject(error);
+       return;
       }
-      return resolve();
+      resolve();
+      return;
     });
   });
 }
