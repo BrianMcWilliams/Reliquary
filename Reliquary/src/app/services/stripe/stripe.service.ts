@@ -16,7 +16,6 @@ export class StripeService {
   }
     // This will save the token to firebase, triggering the cloud function
     processPayment(token: any, amount) {
-      debugger;
       const payment = { token, amount}
       return this.db.list(`/payments/${this.userId}`).push(payment);
     }
