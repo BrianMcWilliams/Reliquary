@@ -17,7 +17,7 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 const logging: any = require('@google-cloud/logging')
 admin.initializeApp();
-const stripe = require('stripe')(functions.config().stripe.token);
+const stripe = require('stripe')(functions.config().stripe.secret);
 const currency = functions.config().stripe.currency || 'USD';
 
 // [START chargecustomer]
@@ -26,7 +26,7 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
       const val = snap.data();
       try {
         // Look up the Stripe customer id written in createStripeCustomer
-        const snapshot = await admin.firestore().collection(`stripe_customers`).doc(context.params.userId).get()
+        const snapshot = await admin.firestore().collection(`stripe_customers`).doc(`${context.params.userId}`).get()
         const snapval = snapshot.data();
         const customer = snapval?.customer_id
         // Create a charge using the pushId as the idempotency key
