@@ -23,12 +23,16 @@ const currency = functions.config().stripe.currency || 'USD';
 // [START chargecustomer]
 // Charge the Stripe customer whenever an amount is created in Cloud Firestore
 exports.createStripeCharge = functions.firestore.document('stripe_customers/{userId}/charges/{id}').onCreate(async (snap: any, context: any) => {
+      console.log("Creating charge");
       const val = snap.data();
+
       try {
         // Look up the Stripe customer id written in createStripeCustomer
-        const snapshot = await admin.firestore().collection(`stripe_customers`).doc(`${context.params.userId}`).get()
+        const snapshot = await admin.firestore().collection(`stripe_customers`).doc(`${context.params.userId}`).get();
         const snapval = snapshot.data();
         const customer = snapval?.customer_id
+
+        console.log("Found customer ", customer);
         // Create a charge using the pushId as the idempotency key
         // protecting against double charges
         const amount = val.amount;
@@ -37,7 +41,16 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
         if (val.source !== null) {
           charge.source = val.source;
         }
+
+        console.log("Charging : ", charge);
+
         const response = await stripe.charges.create(charge, {idempotencyKey: idempotencyKey});
+        
+
+        const log = new logging.Entry("Response " + response);
+        log.write();
+        console.log("Response : ", response);
+
         // If the result is successful, write it back to the database
         return snap.ref.set(response, { merge: true });
       } catch(error) {
@@ -53,14 +66,25 @@ exports.createStripeCharge = functions.firestore.document('stripe_customers/{use
 
 // When a user is created, register them with Stripe
 exports.createStripeCustomer = functions.auth.user().onCreate(async (user: any) => {
-  const customer = await stripe.customers.create({email: user.email});
-  return admin.firestore().collection('stripe_customers').doc(user.uid).set({customer_id: customer.id});
+  try {
+    const customer = await stripe.customers.create({email: user.email});
+    return admin.firestore().collection('stripe_customers').doc(user.uid).set({customer_id: customer.id});
+  }
+  catch(err)
+  {
+    reportError(err).catch(err => console.log(err));
+    return;
+  }
 });
 
 // Add a payment source (card) for a user by writing a stripe payment source token to Cloud Firestore
-exports.addPaymentSource = functions.firestore.document('/stripe_customers/{userId}/tokens/{pushId}').onCreate(async (snap: any, context: any) => {
+exports.addPaymentSource = functions.firestore.document('stripe_customers/{userId}/tokens/{id}').onCreate(async (snap: any, context: any) => {
+  console.log("Start adding payment source");
   const source = snap.data();
-  const token = source.token;
+  console.log("source is :", source);
+  const token = source.id;
+
+  console.log("Token is :", token);
   if (source === null){
     return null;
   }
@@ -69,6 +93,8 @@ exports.addPaymentSource = functions.firestore.document('/stripe_customers/{user
     const snapshot = await admin.firestore().collection('stripe_customers').doc(context.params.userId).get();
     const customer =  snapshot.data()?.customer_id;
     const response = await stripe.customers.createSource(customer, {source: token});
+
+    console.log(response);
     return admin.firestore().collection('stripe_customers').doc(context.params.userId).collection("sources").doc(response.fingerprint).set(response, {merge: true});
   } catch (error) {
     await snap.ref.set({'error':userFacingMessage(error)},{merge:true});
