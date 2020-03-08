@@ -77,11 +77,76 @@ exports.createStripeCustomer = functions.auth.user().onCreate(async (user: any) 
   }
 });
 
+
+
+exports.GetStripeCustomer = functions.https.onRequest(async (req, res) => {
+  try {
+    res.set('Access-Control-Allow-Origin', '*');
+
+  if (req.method === 'OPTIONS') {
+    res.set('Access-Control-Allow-Methods', 'GET');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    return res.status(204).send('');
+  } else {
+    if(req.body.customerId){
+      const response = await stripe.customers.retrieve(req.body.customerId);
+      console.log("Response from stripe", response);
+
+      return res.status(200).send({message: response});
+    }
+    else {
+        return res.status(401).send({message: "Request needs customerId attribute, find it in the stripe_customers DB"});
+      }
+    }
+  }
+  catch (e)
+  {
+    console.log(e);
+    return res.status(401).send(e);
+  }
+});
+
+exports.CreateStripeCustomer = functions.https.onRequest(async (req, res) => {
+  try {
+    res.set('Access-Control-Allow-Origin', '*');
+
+  if (req.method === 'OPTIONS') {
+    res.set('Access-Control-Allow-Methods', 'GET');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+    res.set('Access-Control-Max-Age', '3600');
+    return res.status(204).send('');
+  } else {
+    if(req.body.email){
+      
+      const response = await stripe.customers.create({email: req.body.email});
+      console.log("Response from stripe", response);
+
+      return res.status(200).send({message: response});
+    }
+    else {
+        return res.status(401).send({message: "Request needs email attribute, find it in the users DB"});
+      }
+    }
+  }
+  catch (e)
+  {
+    console.log(e);
+    return res.status(401).send(e);
+  }
+});
+
+
+
+
+
+
 // Add a payment source (card) for a user by writing a stripe payment source token to Cloud Firestore
 exports.addPaymentSource = functions.firestore.document('stripe_customers/{userId}/tokens/{id}').onCreate(async (snap: any, context: any) => {
   console.log("Start adding payment source");
-  const source = snap.data();
-  console.log("source is :", source);
+  const source = snap.data().token;
+  console.log("snapshot is snap.data", snap.data());
+  console.log("source is snap.data().token =>:", source);
   const token = source.id;
 
   console.log("Token is :", token);
@@ -90,12 +155,13 @@ exports.addPaymentSource = functions.firestore.document('stripe_customers/{userI
   }
 
   try {
-    const snapshot = await admin.firestore().collection('stripe_customers').doc(context.params.userId).get();
+    const snapshot = await admin.firestore().collection('stripe_customers').doc(`${context.params.userId}`).get();
     const customer =  snapshot.data()?.customer_id;
     const response = await stripe.customers.createSource(customer, {source: token});
 
     console.log(response);
-    return admin.firestore().collection('stripe_customers').doc(context.params.userId).collection("sources").doc(response.fingerprint).set(response, {merge: true});
+    await admin.firestore().collection('stripe_customers').doc(`${context.params.userId}`).collection("sources").doc(`${response.fingerprint}`).set(response, {merge: true});
+    return admin.firestore().collection(`stripe_customers/${context.params.userId}/charges/`).add(source.payment);
   } catch (error) {
     await snap.ref.set({'error':userFacingMessage(error)},{merge:true});
     reportError(error, {user: context.params.userId}).catch((e) => console.log(e));
