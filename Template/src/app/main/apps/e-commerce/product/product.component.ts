@@ -100,25 +100,23 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
     createProductForm(): FormGroup
     {
         return this._formBuilder.group({
-            id              : [this.product.id],
-            name            : [this.product.name],
-            handle          : [this.product.handle],
-            description     : [this.product.description],
-            categories      : [this.product.categories],
-            tags            : [this.product.tags],
-            images          : [this.product.images],
-            priceTaxExcl    : [this.product.priceTaxExcl],
-            priceTaxIncl    : [this.product.priceTaxIncl],
-            taxRate         : [this.product.taxRate],
-            comparedPrice   : [this.product.comparedPrice],
-            quantity        : [this.product.quantity],
-            sku             : [this.product.sku],
-            width           : [this.product.width],
-            height          : [this.product.height],
-            depth           : [this.product.depth],
-            weight          : [this.product.weight],
-            extraShippingFee: [this.product.extraShippingFee],
-            active          : [this.product.active]
+            'ASIN'   : [this.product['ASIN']],
+            'Barcode'   : [this.product['Barcode']],
+            'Brand'   : [this.product['Brand']],
+            'Buy Price'   : [this.product['Buy Price']],
+            'Category'   : [this.product['Category']],
+            'Description'   : [this.product['Description']],
+            'Domestic Only'   : [this.product['Domestic Only']],
+            'MSRP'   : [this.product['MSRP']],
+            'Manufacturer  SKU'  : [this.product['Manufacturer SKU']],
+            'Max Qty'   : [this.product['Max Qty']],
+            'Product Name'   : [this.product['Product Name']],
+            'Sell Price'   : [this.product['Sell Price']],
+            'Tax Exempt'   : [this.product['Tax Exempt']],
+            'Total Qty'           : [this.product['Total Qty']],
+            'URL'          : [this.product['URL']],
+            'Weight'           : [this.product['Weight']],
+            'Wishlists'          : [this.product['Wishlists']]
         });
     }
 
@@ -165,7 +163,7 @@ export class EcommerceProductComponent implements OnInit, OnDestroy
                 });
 
                 // Change the location with new one
-                this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
+                // this._location.go('apps/e-commerce/products/' + this.product.id + '/' + this.product.handle);
             });
     }
 }

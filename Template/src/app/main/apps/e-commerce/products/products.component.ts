@@ -120,7 +120,7 @@ export class FilesDataSource extends DataSource<any>
 
                         this.filteredData = [...data];
 
-                        data = this.sortData(data);
+                        // data = this.sortData(data);
 
                         // Grab the page's slice of data.
                         const startIndex = this._matPaginator.pageIndex * this._matPaginator.pageSize;
@@ -180,45 +180,45 @@ export class FilesDataSource extends DataSource<any>
      * @param data
      * @returns {any[]}
      */
-    sortData(data): any[]
-    {
-        if ( !this._matSort.active || this._matSort.direction === '' )
-        {
-            return data;
-        }
+    // sortData(data): any[]
+    // {
+    //     if ( !this._matSort.active || this._matSort.direction === '' )
+    //     {
+    //         return data;
+    //     }
 
-        return data.sort((a, b) => {
-            let propertyA: number | string = '';
-            let propertyB: number | string = '';
+    //     return data.sort((a, b) => {
+    //         let propertyA: number | string = '';
+    //         let propertyB: number | string = '';
 
-            switch ( this._matSort.active )
-            {
-                case 'id':
-                    [propertyA, propertyB] = [a.id, b.id];
-                    break;
-                case 'name':
-                    [propertyA, propertyB] = [a.name, b.name];
-                    break;
-                case 'categories':
-                    [propertyA, propertyB] = [a.categories[0], b.categories[0]];
-                    break;
-                case 'price':
-                    [propertyA, propertyB] = [a.priceTaxIncl, b.priceTaxIncl];
-                    break;
-                case 'quantity':
-                    [propertyA, propertyB] = [a.quantity, b.quantity];
-                    break;
-                case 'active':
-                    [propertyA, propertyB] = [a.active, b.active];
-                    break;
-            }
+    //         switch ( this._matSort.active )
+    //         {
+    //             case 'id':
+    //                 [propertyA, propertyB] = [a.id, b.id];
+    //                 break;
+    //             case 'name':
+    //                 [propertyA, propertyB] = [a.name, b.name];
+    //                 break;
+    //             case 'categories':
+    //                 [propertyA, propertyB] = [a.categories[0], b.categories[0]];
+    //                 break;
+    //             case 'price':
+    //                 [propertyA, propertyB] = [a.priceTaxIncl, b.priceTaxIncl];
+    //                 break;
+    //             case 'quantity':
+    //                 [propertyA, propertyB] = [a.quantity, b.quantity];
+    //                 break;
+    //             case 'active':
+    //                 [propertyA, propertyB] = [a.active, b.active];
+    //                 break;
+    //         }
 
-            const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-            const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+    //         const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+    //         const valueB = isNaN(+propertyB) ? propertyB : +propertyB;
 
-            return (valueA < valueB ? -1 : 1) * (this._matSort.direction === 'asc' ? 1 : -1);
-        });
-    }
+    //         return (valueA < valueB ? -1 : 1) * (this._matSort.direction === 'asc' ? 1 : -1);
+    //     });
+    // }
 
     /**
      * Disconnect
