@@ -26,8 +26,8 @@ import { FakeDbService } from 'app/fake-db/fake-db.service';
 import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
-import { environment } from '../environments/environment';
-
+import { StripePayComponent } from './stripe/stripe-pay/stripe-pay.component';
+import { StripeService } from './services/stripe/stripe.service';
 
 const appRoutes: Routes = [
     {
@@ -47,7 +47,7 @@ const appRoutes: Routes = [
         loadChildren: () => import('./main/documentation/documentation.module').then(m => m.DocumentationModule)
     },
     {
-        path      : '**',
+        path      : '*',
         redirectTo: 'apps/dashboards/analytics'
     }
 ];
@@ -77,7 +77,6 @@ const firebaseConfig = {
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(appRoutes),
-
         TranslateModule.forRoot(),
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay             : 0,
@@ -102,6 +101,7 @@ const firebaseConfig = {
         LayoutModule,
         AppStoreModule
     ],
+    providers: [ StripeService ],
     bootstrap   : [
         AppComponent
     ]
