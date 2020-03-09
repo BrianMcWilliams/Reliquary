@@ -1,0 +1,86 @@
+@import "" src;
+mail-details {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+mail-details .select-message-text {
+  font-size: 24px;
+  font-weight: 300;
+}
+mail-details .mail-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid;
+}
+mail-details .mail-header .actions {
+  min-width: 88px;
+}
+mail-details .mail-header .subject {
+  font-size: 17px;
+  font-weight: 600;
+}
+mail-details .mail-header .label {
+  font-size: 11px;
+  border-radius: 4px;
+  margin: 4px 4px 4px 0;
+  padding: 3px 8px;
+}
+mail-details .mail-header .label .label-color {
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+mail-details .mail-content {
+  padding: 24px 0;
+}
+mail-details .mail-content .to .to-text {
+  margin-right: 4px;
+  text-transform: lowercase;
+}
+mail-details .mail-content .info {
+  padding-bottom: 16px;
+}
+mail-details .mail-content .info .avatar {
+  margin-right: 16px;
+}
+mail-details .mail-content .info .name {
+  margin-right: 8px;
+  font-weight: 600;
+}
+mail-details .mail-content .info .toggle-details {
+  user-select: none;
+  text-decoration: underline;
+  padding-top: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+mail-details .mail-content .info .details {
+  padding-top: 8px;
+}
+mail-details .mail-content .info .details .title {
+  font-weight: 600;
+  margin-right: 6px;
+}
+mail-details .mail-attachments {
+  padding: 24px 0;
+  border-top: 1px solid;
+}
+mail-details .mail-attachments .title {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+mail-details .mail-attachments .attachment .preview {
+  width: 100px;
+  margin: 0 16px 8px 0;
+  border-radius: 4px;
+}
+mail-details .mail-attachments .attachment .link {
+  margin-bottom: 2px;
+}
+mail-details .mail-attachments .attachment .size {
+  font-size: 11px;
+}

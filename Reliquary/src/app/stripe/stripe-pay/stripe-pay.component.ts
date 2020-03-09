@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { StripeService } from 'src/app/services/stripe/stripe.service';
+import { StripeService } from '../../services/stripe/stripe.service';
 import { environment } from '../../../environments/environment';
 
 declare var StripeCheckout:any;

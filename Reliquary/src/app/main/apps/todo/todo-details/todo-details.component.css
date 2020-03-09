@@ -1,0 +1,37 @@
+@import "" src;
+todo-details {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+todo-details .todo-header {
+  padding: 24px;
+  border-bottom: 1px solid;
+}
+todo-details .todo-header .actions {
+  min-width: 88px;
+}
+todo-details .todo-content {
+  padding: 24px;
+}
+todo-details .todo-content .title {
+  font-size: 17px;
+  font-weight: 600;
+}
+todo-details .todo-content .tag {
+  font-size: 11px;
+  border-radius: 2px;
+  margin: 8px 4px 0 0;
+  padding: 3px 8px;
+}
+todo-details .todo-content .tag .tag-color {
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+todo-details .todo-content .dates .mat-form-field {
+  width: auto !important;
+}
