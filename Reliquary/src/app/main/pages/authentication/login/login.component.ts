@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { FuseConfigService } from '@fuse/services/config.service';
 import { fuseAnimations } from '@fuse/animations';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from 'app/main/apps/services/auth.service';
 
 @Component({
     selector     : 'login',

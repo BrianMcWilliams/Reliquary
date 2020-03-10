@@ -27,7 +27,7 @@ import { AppComponent } from 'app/app.component';
 import { AppStoreModule } from 'app/store/store.module';
 import { LayoutModule } from 'app/layout/layout.module';
 import { StripePayComponent } from './stripe/stripe-pay/stripe-pay.component';
-import { StripeService } from './services/stripe/stripe.service';
+import { StripeService } from 'app/main/apps/services/stripe/stripe.service';
 
 const appRoutes: Routes = [
     {
