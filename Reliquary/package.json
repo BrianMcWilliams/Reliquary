@@ -55,7 +55,7 @@
     "igniteui-angular": "^9.0.2",
     "lodash": "4.17.15",
     "minireset.css": "~0.0.4",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "mtgsdk": "^0.4.3",
     "ng2-charts": "2.3.0",
     "ngrx-store-freeze": "0.2.4",
